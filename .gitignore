@@ -2,6 +2,9 @@
 .vs/
 .vsconfig
 
+x64/
+Debug/
+
 # Prerequisites
 *.d
 

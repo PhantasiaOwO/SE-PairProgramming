@@ -14,31 +14,9 @@
 
 ### 分数表示类
 
-提供分数的表示与运算
+参考来源：[C++分数类 by 拱大垲-博客园](https://www.cnblogs.com/gongkai/p/10806080.html)
 
-构造函数
 
-```C++
-fraction(int num, int den = 1);
-```
-
-运算
-
-```C++
-fraction operator+(const fraction& f);
-fraction operator-(const fraction& f);
-fraction operator+(const fraction& f1, const fraction& f2);
-fraction operator-(const fraction& f1, const fraction& f2);
-fraction operator*(const fraction& f1, const fraction& f2);
-fraction operator/(const fraction& f1, const fraction& f2);
-```
-
-输入输出
-
-```
-ostream& operator<<(ostream& os, fraction& f);
-istream& operator>>(istream& os, fraction& f);
-```
 
 ### 树结构
 
@@ -52,7 +30,7 @@ istream& operator>>(istream& os, fraction& f);
 
 ### 文件IO模块
 
-将生成的题目列表写入文件 `Ecercises.txt`，将对应的答案列表写入文件 `Answers.txt`
+将生成的题目列表写入文件 `Exercises.txt`，将对应的答案列表写入文件 `Answers.txt`
 
 读取 `<exercisefile>.txt` 中的题目文件，读取 `<answerfile>.txt` 中的答案文件
 
