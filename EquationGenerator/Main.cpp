@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "Functions.h"
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -37,7 +39,7 @@ int main(int argc, char* argv[]) {
         cerr << L"-r 所接收的参数必须为大于0的自然数！" << endl;
     }
     if (exerciseCount != 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
-        // TODO 生成题目分支
+        GenerateExpression(exerciseCount, numsMax);
     } else if (!exerciseFile.empty() && !answerFile.empty()) {
         bool canEnter = false;
         do {
@@ -49,7 +51,7 @@ int main(int argc, char* argv[]) {
             canEnter = true;
         } while (false);
         if (canEnter) {
-            // TODO 判断题目分支
+            JudgeAnswers(exerciseFile, answerFile);
         } else cerr << L"文件字符串异常" << endl;
     } else {
         cerr << R"(参数异常，无法选择功能！
