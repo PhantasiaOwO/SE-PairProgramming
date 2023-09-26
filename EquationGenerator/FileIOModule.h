@@ -21,6 +21,6 @@ void ReadExercisesFromFile(const std::string& fileName, std::vector<Expression>&
 // 从文件读取答案列表，传入参数：文件名称、习题列表引用
 void ReadAnswersFromFile(const std::string& fileName, std::vector<Fraction>& outFraction);
 // 写入判定结果文件
-void WriteJudgeResultToFile(const std::string, std::vector<int>& correctList,std::vector<int>& wrongList);
+void WriteJudgeResultToFile(std::vector<int>& correctList,std::vector<int>& wrongList);
 
 #endif // __FILEIOMODULE__

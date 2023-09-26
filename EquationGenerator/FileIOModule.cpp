@@ -58,7 +58,7 @@ void ReadAnswersFromFile(const string& fileName, std::vector<Fraction>& outFract
     file.close();
 }
 
-void WriteJudgeResultToFile(const std::string, std::vector<int>& correctList, std::vector<int>& wrongList) {
+void WriteJudgeResultToFile(std::vector<int>& correctList, std::vector<int>& wrongList) {
     ofstream file;
     file.open(GradeFileName, ios::out);
     file << "Correct: " << correctList.size() << "(";
