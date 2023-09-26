@@ -9,7 +9,14 @@ int main(int argc, char* argv[]) {
     string exerciseFile;
     string answerFile;
 
-    if ((argc & 1) == 0) cerr << L"输入的参数不合法" << endl;
+    if ((argc & 1) == 0) {
+        cerr << L"输入的参数不合法" << endl;
+        cerr << R"(支持如下参数：
+-n <num> 生成个数
+-r <num> 随机数最大值（取不到）
+-e <exercisefile>.txt 习题文件目录
+-a <answerfile>.txt 答案文件目录)" << endl;
+    }
     for (int i = 1; i + 1 < argc; i += 2) {
         string type(argv[i]);
         string param(argv[i + 1]);
@@ -26,7 +33,10 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if (exerciseCount != 0 && numsMax != 0) {
+    if (numsMax <= 0) {
+        cerr << L"-r 所接收的参数必须为大于0的自然数！" << endl;
+    }
+    if (exerciseCount != 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
         // TODO 生成题目分支
     } else if (!exerciseFile.empty() && !answerFile.empty()) {
         bool canEnter = false;
@@ -42,8 +52,13 @@ int main(int argc, char* argv[]) {
             // TODO 判断题目分支
         } else cerr << L"文件字符串异常" << endl;
     } else {
-        cerr << L"参数异常，无法选择功能！" << endl;
+        cerr << R"(参数异常，无法选择功能！
+可能的原因：
+判断题目参数-e -a没有同时出现
+混用判断题目参数和生成题目参数)" << endl;
     }
 
+    system("pause");
+    
     return 0;
 }
