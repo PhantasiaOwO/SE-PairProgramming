@@ -157,11 +157,13 @@
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="FileIOModule.cpp" />
     <ClCompile Include="Fraction.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression.h" />
     <ClInclude Include="Fraction.h" />
+    <ClInclude Include="Functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileIOModule.h" />
