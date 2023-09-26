@@ -23,6 +23,7 @@ namespace std {
         int _den;
 
     public:
+        // 获取两个数的最大公约数
         static int MCF(int a, int b);
 
         friend ostream& operator<<(ostream& os, const Fraction& f);
@@ -67,23 +68,32 @@ namespace std {
 
         friend bool operator!=(const Fraction& f1, const Fraction& f2);
 
+        // 默认构造函数，为0
         Fraction();
 
+        // 构造整数，分母为1
         Fraction(int num);
 
+        // 传入整型的分子和分母构造分数
         Fraction(int num, int den);
 
-        Fraction(Fraction f1, Fraction f2);
+        // 传入分数型的分子和分母构造分数
+        Fraction(Fraction fNum, Fraction fDen);
 
-        double Decimal();
+        // 获取分数对应的浮点表示
+        double Decimal()const ;
 
-        int GetNum();
+        // 获取分子
+        int Num() const;
 
-        int GetDen();
+        // 获取分母
+        int Den() const ;
 
-        void SetNum(int num);
+        // 设置分子
+        void Num(int num);
 
-        void SetDen(int den);
+        // 设置分母
+        void Den(int den);
     };
 }
 

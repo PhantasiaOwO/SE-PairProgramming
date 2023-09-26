@@ -29,7 +29,7 @@ namespace std {
         is >> input;
         for (int i = 0;; i++) {
             ch = input[i];
-            if(ch =='\'') {
+            if (ch == '\'') {
                 integer = f._num;
                 f._num = 0;
                 continue;
@@ -48,7 +48,7 @@ namespace std {
         }
         if (mid == false) f._den = 1;
         if (f._den == 0) {
-            cout << "False,the denominator == 0!!!";
+            cerr << L"不允许分母为0！" << endl;
             return is;
         }
         f._num += integer * f._den;
@@ -165,41 +165,41 @@ namespace std {
         _den = den / mcf;
     }
 
-    Fraction::Fraction(Fraction f1, Fraction f2) {
-        int num = f1._num * f2._den;
-        int den = f1._den * f2._num;
+    Fraction::Fraction(Fraction fNum, Fraction fDen) {
+        int num = fNum._num * fDen._den;
+        int den = fNum._den * fDen._num;
         int mcf = Fraction::MCF(num, den);
         _num = num / mcf;
         _den = den / mcf;
     }
 
-    double Fraction::Decimal() {
+    double Fraction::Decimal() const {
         return 1.0 * _num / _den;
     }
 
-    int Fraction::GetNum() {
+    int Fraction::Num() const {
         return _num;
     }
 
-    int Fraction::GetDen() {
+    int Fraction::Den() const {
         return _den;
     }
 
-    void Fraction::SetNum(int num) {
+    void Fraction::Num(int num) {
         _num = num;
         int mcf = Fraction::MCF(_num, _den);
         _num /= mcf;
         _den /= mcf;
     }
 
-    void Fraction::SetDen(int den) {
+    void Fraction::Den(int den) {
         if (den != 0) {
             _den = den;
             int mcf = Fraction::MCF(_num, _den);
             _num /= mcf;
             _den /= mcf;
         } else {
-            cout << "False,the denominator == 0!!!";
+            cerr << L"不允许分母为0！" << endl;
         }
     }
 }
