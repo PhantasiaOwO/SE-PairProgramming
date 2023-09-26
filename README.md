@@ -14,9 +14,58 @@
 
 ### 分数表示类
 
-参考来源：[C++分数类 by 拱大垲-博客园](https://www.cnblogs.com/gongkai/p/10806080.html)
+提供分数的构造和运算
 
+构造函数声明
 
+```C++
+// 默认构造函数，为0
+Fraction();
+
+// 构造整数，分母为1
+Fraction(int num);
+
+// 传入整型的分子和分母构造分数
+Fraction(int num, int den);
+
+// 传入分数型的分子和分母构造分数
+Fraction(Fraction fNum, Fraction fDen);
+```
+
+运算符重载
+
+```C++
+// 流输入输出
+friend ostream& operator<<(ostream& os, const Fraction& f);
+friend istream& operator>>(istream& is, Fraction& f);
+// 运算
+friend Fraction operator+(const Fraction& f1, const Fraction& f2);
+friend Fraction operator-(const Fraction& f1, const Fraction& f2);
+friend Fraction operator*(const Fraction& f1, const Fraction& f2);
+friend Fraction operator/(const Fraction& f1, const Fraction& f2);
+friend Fraction operator+=(Fraction& f1, const Fraction& f2);
+friend Fraction operator-=(Fraction& f1, const Fraction& f2);
+friend Fraction operator*=(Fraction& f1, const Fraction& f2);
+friend Fraction operator/=(Fraction& f1, const Fraction& f2);
+friend Fraction operator-(const Fraction& f);
+friend Fraction operator++(Fraction& f);
+friend Fraction operator++(Fraction& f, int);
+friend Fraction operator--(Fraction& f);
+friend Fraction operator--(Fraction& f, int);
+// 比较
+friend bool operator>(const Fraction& f1, const Fraction& f2);
+friend bool operator<(const Fraction& f1, const Fraction& f2);
+friend bool operator>=(const Fraction& f1, const Fraction& f2);
+friend bool operator<=(const Fraction& f1, const Fraction& f2);
+friend bool operator==(const Fraction& f1, const Fraction& f2);
+friend bool operator!=(const Fraction& f1, const Fraction& f2);
+```
+
+算法：获取最大公约数
+
+```C++
+static int MCF(int a, int b);
+```
 
 ### 树结构
 
@@ -26,9 +75,19 @@
 
 ### 题目生成模块
 
+```C++
+// 生成表达式功能函数主体
+void GenerateExpression(const int exerciseCount, const int maxRandomNum);
+```
+
 
 
 ### 题目判定模块
+
+```C++
+// 判断答案函数主体
+void JudgeAnswers(const std::string& exerciseFileName, const std::string& answersFileName);
+```
 
 
 
@@ -58,13 +117,32 @@
 ...
 ```
 
+
+
+提供四个函数执行相关操作
+
+```C++
+// 向文件写入习题列表，传入参数：习题列表
+void WriteExercisesToFile(const std::vector<Expression>& exercises);
+// 向文件写入答案列表，传入参数：习题列表
+void WriteAnswersToFile(const std::vector<Fraction>& results);
+// 从文件读取习题列表，传入参数：文件名称、习题列表引用
+void ReadExercisesFromFile(const string fileName, std::vector<Expression>& outExpressions);
+// 从文件读取答案列表，传入参数：文件名称、习题列表引用
+void ReadAnswersFromFile(const string fileName, std::vector<Fraction>& outFraction);
+```
+
 ### 报错提示模块
 
-参数不合法异常
+所有的错误信息使用 `cerr` 输出
+
+
 
 对参数 `-n <num>` 和 `-r <num>` 需要保证 `<num> > 0`
 
 对参数 `-e` 和 `-a` 需要同时接收并且检查 `<exercisefile>.txt` 和 `<answerfile>.txt` 能否正常读取
+
+不允许两种功能的参数混用
 
 
 
