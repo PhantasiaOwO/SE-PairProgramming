@@ -35,12 +35,12 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if (numsMax <= 0) {
-        cerr << L"-r 所接收的参数必须为大于0的自然数！" << endl;
+    if (numsMax <= 0 || exerciseCount <= 0) {
+        cerr << L"-r 和 -n 所接收的参数必须为大于0的自然数！" << endl;
     }
-    if (exerciseCount != 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
+    if (exerciseCount > 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
         GenerateExpression(exerciseCount, numsMax);
-    } else if (!exerciseFile.empty() && !answerFile.empty()) {
+    } else if (numsMax == 0 && exerciseCount == 0 && !exerciseFile.empty() && !answerFile.empty()) {
         bool canEnter = false;
         do {
             if (strrchr(exerciseFile.c_str(), '.') == nullptr) break; // 文件名中有 .
