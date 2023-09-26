@@ -8,8 +8,13 @@ namespace std {
     ostream& operator<<(ostream& os, const Fraction& f) {
         const bool positive = f._num >= 0 && f._den >= 0 || f._num < 0 && f._den < 0;
         if (positive == false) os << "(-";
-        if (f._den != 1) os << abs(f._num) << "/" << abs(f._den);
-        else os << abs(f._num);
+        if (f._den != 1) {
+            if (abs(f._num) >= abs(f._den)) {
+                os << abs(f._num) / abs(f._den) << "'" << abs(f._num) % abs(f._den) << "/" << abs(f._den);
+            } else {
+                os << abs(f._num) << "/" << abs(f._den);
+            }
+        } else os << abs(f._num);
         if (positive == false) os << ")";
         return os;
     }
@@ -19,11 +24,17 @@ namespace std {
         char ch;
         bool mid = false;
         bool is_pt = true;
+        int integer = 0;
         f._num = f._den = 0;
         cin >> input;
         for (int i = 0;; i++) {
             ch = input[i];
             if (ch == '\0' || ch == ' ') break;
+            if(ch =='\'') {
+                integer = f._num;
+                f._num = 0;
+                continue;
+            }
             if (ch == '-') {
                 is_pt = !is_pt;
                 continue;
@@ -40,6 +51,7 @@ namespace std {
             cout << "False,the denominator == 0!!!";
             return is;
         }
+        f._num += integer * f._den;
         int mcf = Fraction::MCF(f._num, f._den);
         f._num /= mcf;
         f._den /= mcf;
