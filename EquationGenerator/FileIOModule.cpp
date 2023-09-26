@@ -23,7 +23,7 @@ void WriteAnswersToFile(const std::vector<Fraction>& results) {
     file.close();
 }
 
-void ReadExercisesFromFile(const string fileName, std::vector<Expression>& outExpressions) {
+void ReadExercisesFromFile(const string& fileName, std::vector<Expression>& outExpressions) {
     ifstream file;
     file.open(fileName, ios::in);
     if (!file.is_open()) {
@@ -39,7 +39,7 @@ void ReadExercisesFromFile(const string fileName, std::vector<Expression>& outEx
     file.close();
 }
 
-void ReadAnswersFromFile(const string fileName, std::vector<Fraction>& outFraction) {
+void ReadAnswersFromFile(const string& fileName, std::vector<Fraction>& outFraction) {
     ifstream file;
     file.open(fileName, ios::in);
     if (!file.is_open()) {
@@ -54,6 +54,22 @@ void ReadAnswersFromFile(const string fileName, std::vector<Fraction>& outFracti
         Fraction f;
         ss >> f;
         outFraction.push_back(f);
+    }
+    file.close();
+}
+
+void WriteJudgeResultToFile(const std::string, std::vector<int>& correctList, std::vector<int>& wrongList) {
+    ofstream file;
+    file.open(GradeFileName, ios::out);
+    file << "Correct: " << correctList.size() << "(";
+    for (size_t i = 0; i < correctList.size(); ++i) {
+        if (i + 1 == correctList.size()) file << correctList[i] << ")" << endl;
+        else file << correctList[i] << ", ";
+    }
+    file << "Wrong: " << wrongList.size() << "(";
+    for (size_t i = 0; i < wrongList.size(); ++i) {
+        if (i + 1 == wrongList.size()) file << wrongList[i] << ")" << endl;
+        else file << wrongList[i] << ", ";
     }
     file.close();
 }
