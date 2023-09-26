@@ -55,22 +55,22 @@ namespace std {
 
         friend Fraction operator--(Fraction& f, int);
 
-        friend bool operator>(Fraction& f1, const Fraction& f2);
+        friend bool operator>(const Fraction& f1, const Fraction& f2);
 
-        friend bool operator<(Fraction& f1, const Fraction& f2);
+        friend bool operator<(const Fraction& f1, const Fraction& f2);
 
-        friend bool operator>=(Fraction& f1, const Fraction& f2);
+        friend bool operator>=(const Fraction& f1, const Fraction& f2);
 
-        friend bool operator<=(Fraction& f1, const Fraction& f2);
+        friend bool operator<=(const Fraction& f1, const Fraction& f2);
 
-        friend bool operator==(Fraction& f1, const Fraction& f2);
+        friend bool operator==(const Fraction& f1, const Fraction& f2);
 
-        friend bool operator!=(Fraction& f1, const Fraction& f2);
+        friend bool operator!=(const Fraction& f1, const Fraction& f2);
 
         Fraction();
 
         Fraction(int num);
-        
+
         Fraction(int num, int den);
 
         Fraction(Fraction f1, Fraction f2);

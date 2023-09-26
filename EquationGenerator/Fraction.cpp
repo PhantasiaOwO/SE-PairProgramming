@@ -26,10 +26,9 @@ namespace std {
         bool is_pt = true;
         int integer = 0;
         f._num = f._den = 0;
-        cin >> input;
+        is >> input;
         for (int i = 0;; i++) {
             ch = input[i];
-            if (ch == '\0' || ch == ' ') break;
             if(ch =='\'') {
                 integer = f._num;
                 f._num = 0;
@@ -43,6 +42,7 @@ namespace std {
                 mid = true;
                 continue;
             }
+            if (ch < '0' || ch > '9') break;
             if (mid == false) f._num = f._num * 10 + (ch - '0');
             else f._den = f._den * 10 + (ch - '0');
         }
@@ -125,27 +125,27 @@ namespace std {
         return f + 1;
     }
 
-    bool operator>(Fraction& f1, const Fraction& f2) {
+    bool operator>(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den > f2._num * f1._den;
     }
 
-    bool operator<(Fraction& f1, const Fraction& f2) {
+    bool operator<(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den < f2._num * f1._den;
     }
 
-    bool operator>=(Fraction& f1, const Fraction& f2) {
+    bool operator>=(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den >= f2._num * f1._den;
     }
 
-    bool operator<=(Fraction& f1, const Fraction& f2) {
+    bool operator<=(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den <= f2._num * f1._den;
     }
 
-    bool operator==(Fraction& f1, const Fraction& f2) {
+    bool operator==(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den == f2._num * f1._den;
     }
 
-    bool operator!=(Fraction& f1, const Fraction& f2) {
+    bool operator!=(const Fraction& f1, const Fraction& f2) {
         return f1._num * f2._den != f2._num * f1._den;
     }
 

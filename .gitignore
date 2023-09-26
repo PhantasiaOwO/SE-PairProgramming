@@ -1,6 +1,7 @@
 .idea/
 .vs/
 .vsconfig
+packages/
 
 x64/
 Debug/
