@@ -154,7 +154,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="FileIOModule.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="Functions.cpp" />
