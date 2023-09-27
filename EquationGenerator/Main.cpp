@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "Functions.h"
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -33,12 +35,12 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    if (numsMax <= 0) {
-        cerr << L"-r 所接收的参数必须为大于0的自然数！" << endl;
+    if (numsMax <= 0 || exerciseCount <= 0) {
+        cerr << L"-r 和 -n 所接收的参数必须为大于0的自然数！" << endl;
     }
-    if (exerciseCount != 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
-        // TODO 生成题目分支
-    } else if (!exerciseFile.empty() && !answerFile.empty()) {
+    if (exerciseCount > 0 && numsMax > 0 && exerciseFile.empty() && answerFile.empty()) {
+        GenerateExpression(exerciseCount, numsMax);
+    } else if (numsMax == 0 && exerciseCount == 0 && !exerciseFile.empty() && !answerFile.empty()) {
         bool canEnter = false;
         do {
             if (strrchr(exerciseFile.c_str(), '.') == nullptr) break; // 文件名中有 .
@@ -49,7 +51,7 @@ int main(int argc, char* argv[]) {
             canEnter = true;
         } while (false);
         if (canEnter) {
-            // TODO 判断题目分支
+            JudgeAnswers(exerciseFile, answerFile);
         } else cerr << L"文件字符串异常" << endl;
     } else {
         cerr << R"(参数异常，无法选择功能！

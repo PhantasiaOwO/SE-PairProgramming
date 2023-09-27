@@ -80,7 +80,9 @@ static int MCF(int a, int b);
 void GenerateExpression(const int exerciseCount, const int maxRandomNum);
 ```
 
+流程图
 
+<img src="https://phantasia-piclib.oss-cn-shenzhen.aliyuncs.com/img/image-20230926184520777.png" alt="image-20230926183830666" style="zoom:33%;" />
 
 ### 题目判定模块
 
@@ -89,7 +91,9 @@ void GenerateExpression(const int exerciseCount, const int maxRandomNum);
 void JudgeAnswers(const std::string& exerciseFileName, const std::string& answersFileName);
 ```
 
+流程图
 
+<img src="https://phantasia-piclib.oss-cn-shenzhen.aliyuncs.com/img/image-20230926183830666.png" alt="image-20230926183830666.png" style="zoom:33%;" />
 
 ### 文件IO模块
 
@@ -130,6 +134,8 @@ void WriteAnswersToFile(const std::vector<Fraction>& results);
 void ReadExercisesFromFile(const string fileName, std::vector<Expression>& outExpressions);
 // 从文件读取答案列表，传入参数：文件名称、习题列表引用
 void ReadAnswersFromFile(const string fileName, std::vector<Fraction>& outFraction);
+// 写入判定结果文件
+void WriteJudgeResultToFile(std::vector<int>& correctList,std::vector<int>& wrongList);
 ```
 
 ### 报错提示模块
