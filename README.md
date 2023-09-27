@@ -67,13 +67,40 @@ friend bool operator!=(const Fraction& f1, const Fraction& f2);
 static int MCF(int a, int b);
 ```
 
-### 树结构
+### 表达式类
 
-用于存储算式
+提供如下公开接口
 
-提供如下操作
+```C++
+// 获得字符串
+std::string GetString() const;
 
-### 题目生成模块
+// 获得表达式结果
+std::Fraction GetResult() const;
+```
+
+表达式内部使用树结构存储，定义如下：
+
+```C++
+struct TreeNode {
+    string val;
+    Fraction result;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(string x) : val(x), result(0), left(nullptr), right(nullptr) {}
+
+    TreeNode(Fraction x) : val(" "), result(0), left(nullptr), right(nullptr) {
+        stringstream ss;
+        ss << x;
+        val = ss.str();
+    }
+};
+```
+
+使用二叉树存储表达式，以此实现最多三个运算符的表达式生成和存储
+
+### 模块
 
 ```C++
 // 生成表达式功能函数主体
