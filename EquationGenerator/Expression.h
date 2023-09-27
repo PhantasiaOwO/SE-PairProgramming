@@ -13,7 +13,9 @@
 
 class Expression {
     friend bool Equal(Expression& e1, Expression& e2);
+
     friend bool operator==(Expression& e1, Expression& e2);
+
 private:
     // 二叉树节点
     inline struct TreeNode {
@@ -21,7 +23,9 @@ private:
         Fraction result;
         TreeNode* left;
         TreeNode* right;
+
         TreeNode(string x) : val(x), result(0), left(NULL), right(NULL) {}
+
         TreeNode(Fraction x) : val(0), result(0), left(NULL), right(NULL) {
             stringstream ss;
             ss << x;
@@ -38,26 +42,21 @@ private:
 
     // 随机生成运算符
     inline string GenerateOperator() {
-        string operators[] = { ADD, SUB,MUL, DIV };
+        string operators[] = {ADD, SUB,MUL, DIV};
         int index = rand() % 4;
         return operators[index];
     }
 
     // 计算结果
     inline Fraction Calculate(Fraction a, Fraction b, const string& op) {
-        if (op == ADD)
-            return a + b;
-        else if (op == SUB)
-            return a - b;
-        else if (op == MUL)
-            return a * b;
-        else if (op == DIV)
-            return a / b;
+        if (op == ADD) return a + b;
+        else if (op == SUB) return a - b;
+        else if (op == MUL) return a * b;
+        else if (op == DIV) return a / b;
     }
 
     inline void FreeTree(TreeNode* tree) {
-        if (tree != NULL)
-        {
+        if (tree != NULL) {
             FreeTree(tree->left);
             FreeTree(tree->right);
             delete tree;
@@ -65,7 +64,7 @@ private:
     }
 
     // 构建二叉树
-    inline TreeNode* BuildTree(int depth,int max) {
+    inline TreeNode* BuildTree(int depth, int max) {
         if (depth == 0) {
             string number = GenerateNumber(max);
             TreeNode* tmp = new TreeNode(number);
@@ -76,12 +75,11 @@ private:
         string operator_ = GenerateOperator();
 
         TreeNode* left = BuildTree(depth - 1, max);
-        TreeNode* right = BuildTree(depth - 1,max);
+        TreeNode* right = BuildTree(depth - 1, max);
 
-        while (operator_ == DIV && right->result == 0)
-        {
+        while (operator_ == DIV && right->result == 0) {
             FreeTree(right);
-            right = BuildTree(depth - 1);
+            right = BuildTree(depth - 1, max);
         }
 
         Fraction result = Calculate(left->result, right->result, operator_);
@@ -101,10 +99,8 @@ private:
     }
 
 
-
-    inline void ExpressTree(TreeNode* tree, string& var, string ope) {
-        if (tree == NULL)
-        {
+    inline void ExpressTree(TreeNode* tree, string& var, string ope) const {
+        if (tree == NULL) {
             return;
         }
 
@@ -117,26 +113,26 @@ private:
 
 public:
     // 默认构造函数
-    inline Expression() {
-
-   }
+    inline Expression(): _root(nullptr) { }
 
     // 生成表达式 传入随机数的最大值和...
     inline Expression(int maxNum, int depth) {
         _root = BuildTree(depth, maxNum);
-   }
-    
+    }
+
     // 将字符串表达式转换为数据结构
-   inline explicit Expression(string& expression);
+    inline explicit Expression(string& expression);
 
     // 获得字符串
-   inline std::string GetString() const {
-       
-   }
+    inline std::string GetString() const {
+        std::string ret;
+        ExpressTree(_root, ret, " ");
+        return ret;
+    }
 
     // 获得表达式结果
-   inline  std::Fraction GetResult() const {
-       
-  }
+    inline std::Fraction GetResult() const {
+        return _root->result;
+    }
 };
 #endif // __EXPRESSION__
