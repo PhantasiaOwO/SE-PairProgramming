@@ -59,8 +59,6 @@ int main(int argc, char* argv[]) {
 判断题目参数-e -a没有同时出现
 混用判断题目参数和生成题目参数)" << endl;
     }
-
-    system("pause");
     
     return 0;
 }

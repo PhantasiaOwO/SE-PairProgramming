@@ -5,18 +5,18 @@
 
 using namespace std;
 
-void WriteExercisesToFile(const std::vector<Expression>& exercises) {
+void WriteExercisesToFile(const std::vector<Expression*>& exercises) {
     ofstream file;
     file.open(ExercisesFileName, ios::out);
     for (size_t i = 0; i < exercises.size(); ++i) {
-        file << i + 1 << '.' << exercises[i].GetString() << endl;
+        file << i + 1 << '.' << exercises[i]->GetString() << endl;
     }
     file.close();
 }
 
 void WriteAnswersToFile(const std::vector<Fraction>& results) {
     ofstream file;
-    file.open(ExercisesFileName, ios::out);
+    file.open(AnswersFileName, ios::out);
     for (size_t i = 0; i < results.size(); ++i) {
         file << i + 1 << '.' << results[i] << endl;
     }
