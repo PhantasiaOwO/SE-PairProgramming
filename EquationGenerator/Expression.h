@@ -132,7 +132,20 @@ private:
         if ((ope == MUL || ope == DIV) && (tree->val == ADD || tree->val == SUB)) var += ") ";
     }
 
-    inline void SameTree(TreeNode* t1, TreeNode* t2) { }
+    inline static bool SameTree(TreeNode* t1, TreeNode* t2) {
+        if (t1 == NULL && t2 == NULL)
+            return true;
+        else if (t1 == NULL || t2 == NULL)
+            return false;
+        else
+        {
+            if (t1->val != t2->val)return false;
+            else {
+                return SameTree(t1->left, t2->left) && SameTree(t1->right, t2->right) || SameTree(t1->left, t2->right) && SameTree(t1->right, t2->left);          
+            }
+                
+        }
+    }
 
 public:
     // 默认构造函数
