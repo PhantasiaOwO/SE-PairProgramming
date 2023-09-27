@@ -14,9 +14,9 @@
 #define ADD "+"
 
 class Expression {
-    friend bool Equal(Expression& e1, Expression& e2);
-
-    friend bool operator==(Expression& e1, Expression& e2);
+    inline friend bool operator==(Expression& e1, Expression& e2) {
+        return SameTree(e1._root, e2._root);
+    }
 
 private:
     // 二叉树节点
@@ -116,7 +116,7 @@ private:
         TreeNode* ths = new TreeNode(elems[mid]);
         ths->left = BuildTree(std::vector<std::string>(elems.begin(), elems.begin() + mid - 1));
         ths->right = BuildTree(std::vector<std::string>(elems.begin() + mid + 1, elems.end()));
-        ths->result = Calculate(ths->left->result , ths->right->result, elems[mid]);
+        ths->result = Calculate(ths->left->result, ths->right->result, elems[mid]);
         return ths;
     }
 
@@ -132,6 +132,8 @@ private:
         if ((ope == MUL || ope == DIV) && (tree->val == ADD || tree->val == SUB)) var += ") ";
     }
 
+    inline void SameTree(TreeNode* t1, TreeNode* t2) { }
+
 public:
     // 默认构造函数
     inline Expression(): _root(nullptr) { }
@@ -143,8 +145,8 @@ public:
 
     // 将字符串表达式转换为数据结构
     inline explicit Expression(string& expression) {
-        std::replace(expression.begin(), expression.end(), string("("), string(""));
-        std::replace(expression.begin(), expression.end(), string(")"), string(""));
+        std::replace(expression.begin(), expression.end(), char("("), char(" "));
+        std::replace(expression.begin(), expression.end(), char(")"), char(" "));
         std::vector<std::string> elems;
         stringstream ss(expression);
         string s;
