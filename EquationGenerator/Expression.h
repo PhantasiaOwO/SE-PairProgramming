@@ -1,8 +1,10 @@
 ﻿#ifndef __EXPRESSION__
 #define __EXPRESSION__
 
+#include <algorithm>
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include "Fraction.h"
 
@@ -98,6 +100,25 @@ private:
         return tmp;
     }
 
+    inline TreeNode* BuildTree(const std::vector<std::string>& elems) {
+        if ((elems.size() & 1) == 0) return nullptr;
+        if (elems.size() == 1) {
+            // 单个元素就是数值
+            auto* ths = new TreeNode(elems[0]);
+            stringstream ss;
+            Fraction f;
+            ss >> f;
+            ths->result = f;
+            return ths;
+        }
+        // 不是单个元素就递归创建
+        int mid = elems.size() / 2;
+        TreeNode* ths = new TreeNode(elems[mid]);
+        ths->left = BuildTree(std::vector<std::string>(elems.begin(), elems.begin() + mid - 1));
+        ths->right = BuildTree(std::vector<std::string>(elems.begin() + mid + 1, elems.end()));
+        ths->result = Calculate(ths->left->result , ths->right->result, elems[mid]);
+        return ths;
+    }
 
     inline void ExpressTree(TreeNode* tree, string& var, string ope) const {
         if (tree == NULL) {
@@ -121,7 +142,17 @@ public:
     }
 
     // 将字符串表达式转换为数据结构
-    inline explicit Expression(string& expression);
+    inline explicit Expression(string& expression) {
+        std::replace(expression.begin(), expression.end(), string("("), string(""));
+        std::replace(expression.begin(), expression.end(), string(")"), string(""));
+        std::vector<std::string> elems;
+        stringstream ss(expression);
+        string s;
+        while (ss >> s) {
+            elems.push_back(s);
+        }
+        _root = BuildTree(elems);
+    }
 
     // 获得字符串
     inline std::string GetString() const {
